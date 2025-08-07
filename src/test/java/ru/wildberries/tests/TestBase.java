@@ -1,9 +1,10 @@
 package ru.wildberries.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import guru.qa.owner.config.BaseConfig;
-import helpers.Attach;
+import helpers.UiAttachUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -51,8 +52,10 @@ public class TestBase {
 
     @AfterEach
     void tearDown() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
+        UiAttachUtils.screenshotAs("Last screenshot");
+        UiAttachUtils.pageSource();
+        UiAttachUtils.browserConsoleLogs();
+        UiAttachUtils.addVideo();
+        Selenide.closeWebDriver();
     }
 }

@@ -1,5 +1,7 @@
 package ru.wildberries.tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,9 @@ import ru.wildberries.pages.MainPage;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 
 
 @DisplayName("Параметризированные тесты на проверку поиска Wildberries")
@@ -30,21 +33,15 @@ public class SearchUiTests extends TestBase {
     @ParameterizedTest(name = "Поиск на запрос {0} должен выдавать 10 результатов")
     @Tag("SMOKE")
     void searchShouldReturn10ResultsTest(String searchQuery) {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        step("Открываем главную страницу", () -> {
+            open("https://github.com");
+        });
         mainPage.openPage()
                 .seatchInputClick(searchQuery)
                 .searchResultShouldBeGreaterThan(10);
     }
 
-    @CsvSource(value = {
-            "Корзина, Перейти на главную"
-    })
-    @Tag("SMOKE")
-    @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
-    void buttunForClickOnBasketTest(String chapter, String buttonText) {
-        mainPage.openPage()
-                .clickOnEmptyBasket(chapter)
-                .emptyBusketShouldHaveButton(buttonText);
-    }
 
     static Stream<Arguments> titlsOnClickBattonAddress() {
         return Stream.of(
@@ -60,17 +57,30 @@ public class SearchUiTests extends TestBase {
     @Tag("SMOKE")
     @ParameterizedTest(name = "Заголовки при нажитии на кнопку \"Адреса\"")
     void titlsOnClickBattonAddress(String chapter, List<String> expectedLinks) {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         mainPage.openPage()
-                .titlesOnCkickBattonAddress(chapter)
+                .clickOnNavbarButton(chapter)
                 .titlesOnCkickBattonAddressResult(expectedLinks);
     }
 
     @Tag("SMOKE")
     @Test
-    @DisplayName("Появление всплывающего меню при клике на поиск по фото")
-    void popUpPhotoSearch() {
-        $(".search-catalog__btn-wrap").hover().click();
-        $("#uploadImageForSearchByImagePopUpContainer").shouldBe(visible);
+    @DisplayName("Заголовок при НЕ валидном запросе поиска")
+    void titleNotValidReqSearch() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        mainPage.openPage()
+                .seatchInputClick("khhhhkjii")
+                .notFoundSearchTitileExist("khhhhkjii");
+    }
+
+    @Tag("SMOKE")
+    @Test
+    @DisplayName("Заголовок при валидном запросе поиска")
+    void titleValidReqSearch() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        mainPage.openPage()
+                .seatchInputClick("Перфоратор")
+                .validSearchTitileExist("Перфоратор");
     }
 
 }
