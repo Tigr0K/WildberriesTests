@@ -1,6 +1,8 @@
 package ru.wildberries.tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -28,6 +30,8 @@ public class SearchUiTests extends TestBase {
     @ValueSource(strings = {"Перфоратор", "Светильник", "Видеокарта"})
     @ParameterizedTest(name = "Поиск на запрос {0} должен выдавать 10 результатов")
     @Tag("SMOKE")
+    @Feature("Поиск")
+    @Story("Проверка поисковой выдачи")
     void searchShouldReturn10ResultsTest(String searchQuery) {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Вводим поисковый запрос", () -> {
@@ -44,7 +48,8 @@ public class SearchUiTests extends TestBase {
     }
 
     @MethodSource
-    @Tag("SMOKE")
+    @Feature("Поиск")
+    @Story("Проверка заголовков")
     @ParameterizedTest(name = "Заголовки при нажитии на кнопку \"Адреса\"")
     void titlsOnClickBattonAddress(String chapter, List<String> expectedLinks) {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -56,8 +61,10 @@ public class SearchUiTests extends TestBase {
         });
     }
 
-    @Tag("SMOKE")
+
     @Test
+    @Feature("Поиск")
+    @Story("Заголовок выдачи")
     @DisplayName("Заголовок при НЕ валидном запросе поиска")
     void titleNotValidReqSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -69,8 +76,9 @@ public class SearchUiTests extends TestBase {
         });
     }
 
-    @Tag("SMOKE")
     @Test
+    @Feature("Поиск")
+    @Story("Заголовок выдачи")
     @DisplayName("Заголовок при валидном запросе поиска")
     void titleValidReqSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -79,6 +87,22 @@ public class SearchUiTests extends TestBase {
         });
         step("Проверяем текст в заголовке", () -> {
             mainPage.validSearchTitileExist("Перфоратор");
+        });
+
+    }
+
+    @Test
+    @Feature("Поиск")
+    @Story("Поиск по фото")
+    @DisplayName("Появление всплывающего меню при клике на поиск по фото")
+    void popUpPhotoSearch() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        step("Нажимаем на кнопку поиска по фото", () -> {
+            mainPage.openPage()
+                    .clickOnPhotoSearch();
+        });
+        step("Проверяем текст на кнопке", () -> {
+            mainPage.popUpclickOnPhotoSearch();
         });
 
     }

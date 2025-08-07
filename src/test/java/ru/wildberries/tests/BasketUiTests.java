@@ -1,6 +1,8 @@
 package ru.wildberries.tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -26,7 +28,8 @@ public class BasketUiTests extends TestBase {
     @CsvSource(value = {
             "Корзина, Перейти на главную"
     })
-    @Tag("SMOKE")
+    @Feature("Корзина")
+    @Story("Заголовок пустой корзины")
     @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
     void buttunForClickOnBasketTest(String chapter, String buttonText) {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -39,25 +42,10 @@ public class BasketUiTests extends TestBase {
         });
     }
 
-
     @Tag("SMOKE")
     @Test
-    @DisplayName("Появление всплывающего меню при клике на поиск по фото")
-    void popUpPhotoSearch() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-        step("Нажимаем на кнопку поиска по фото", () -> {
-            mainPage.openPage()
-                    .clickOnPhotoSearch();
-        });
-        step("Проверяем текст на кнопке", () -> {
-            mainPage.popUpclickOnPhotoSearch();
-        });
-
-    }
-
-
-    @Tag("SMOKE")
-    @Test
+    @Feature("Корзина")
+    @Story("Работа с товарами в корзине")
     @DisplayName("Добавление товара в корзину")
     void addToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -78,6 +66,8 @@ public class BasketUiTests extends TestBase {
 
     @Tag("SMOKE")
     @Test
+    @Feature("Корзина")
+    @Story("Работа с товарами в корзине")
     @DisplayName("Удаления товара из корзины")
     void deleteToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
