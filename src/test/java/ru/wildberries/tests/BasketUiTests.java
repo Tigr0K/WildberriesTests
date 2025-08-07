@@ -15,6 +15,8 @@ import ru.wildberries.pages.MainPage;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static io.qameta.allure.Allure.step;
+
 
 @DisplayName("Параметризированные тесты на проверку поиска Wildberries")
 @Tag("BasketTests")
@@ -28,9 +30,13 @@ public class BasketUiTests extends TestBase {
     @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
     void buttunForClickOnBasketTest(String chapter, String buttonText) {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        mainPage.openPage()
-                .clickOnNavbarButton(chapter)
-                .emptyBusketShouldHaveButton(buttonText);
+        step("Нажимаем на кнопку корзины", () -> {
+            mainPage.openPage()
+                    .clickOnNavbarButton(chapter);
+        });
+        step("Проверяем текст на кнопке", () -> {
+            mainPage.emptyBusketShouldHaveButton(buttonText);
+        });
     }
 
 
@@ -39,9 +45,14 @@ public class BasketUiTests extends TestBase {
     @DisplayName("Появление всплывающего меню при клике на поиск по фото")
     void popUpPhotoSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        mainPage.openPage()
-                .clickOnPhotoSearch()
-                .popUpclickOnPhotoSearch();
+        step("Нажимаем на кнопку поиска по фото", () -> {
+            mainPage.openPage()
+                    .clickOnPhotoSearch();
+        });
+        step("Проверяем текст на кнопке", () -> {
+            mainPage.popUpclickOnPhotoSearch();
+        });
+
     }
 
 
@@ -50,11 +61,19 @@ public class BasketUiTests extends TestBase {
     @DisplayName("Добавление товара в корзину")
     void addToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        mainPage.openPage()
-                .seatchInputClick("Перфоратор")
-                .addToBasketGood()
-                .clickOnNavbarButton("Корзина")
-                .goodEntityIsExist();
+        step("Вводим поисковый запрос", () -> {
+            mainPage.openPage()
+                    .seatchInputClick("Перфоратор");
+        });
+        step("Добавляем товар в корзину", () -> {
+            mainPage.addToBasketGood();
+        });
+        step("Нажимаем на корзину", () -> {
+            mainPage.clickOnNavbarButton("Корзина");
+        });
+        step("Проверяем, что товар в корзине", () -> {
+            mainPage.goodEntityIsExist();
+        });
     }
 
     @Tag("SMOKE")
@@ -62,12 +81,22 @@ public class BasketUiTests extends TestBase {
     @DisplayName("Удаления товара из корзины")
     void deleteToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        mainPage.openPage()
-                .seatchInputClick("Перфоратор")
-                .addToBasketGood()
-                .clickOnNavbarButton("Корзина")
-                .deleteFromBasketGood()
-                .goodEntityIsNotExist();
+        step("Вводим поисковый запрос", () -> {
+            mainPage.openPage()
+                    .seatchInputClick("Перфоратор");
+        });
+        step("Добавляем товар в корзину", () -> {
+            mainPage.addToBasketGood();
+        });
+        step("Нажимаем на корзину", () -> {
+            mainPage.clickOnNavbarButton("Корзина");
+        });
+        step("Удаляем товар из корзины", () -> {
+            mainPage.deleteFromBasketGood();
+        });
+        step("Проверяем, что товаров в корзине нет", () -> {
+            mainPage.goodEntityIsNotExist();
+        });
     }
 
 }
