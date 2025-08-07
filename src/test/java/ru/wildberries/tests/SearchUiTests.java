@@ -2,6 +2,7 @@ package ru.wildberries.tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,7 @@ public class SearchUiTests extends TestBase {
     @Tag("SMOKE")
     @Feature("Поиск")
     @Story("Проверка поисковой выдачи")
+    @Owner("Yuferev")
     void searchShouldReturn10ResultsTest(String searchQuery) {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Вводим поисковый запрос", () -> {
@@ -50,6 +52,7 @@ public class SearchUiTests extends TestBase {
     @MethodSource
     @Feature("Поиск")
     @Story("Проверка заголовков")
+    @Owner("Yuferev")
     @ParameterizedTest(name = "Заголовки при нажитии на кнопку \"Адреса\"")
     void titlsOnClickBattonAddress(String chapter, List<String> expectedLinks) {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -65,6 +68,7 @@ public class SearchUiTests extends TestBase {
     @Test
     @Feature("Поиск")
     @Story("Заголовок выдачи")
+    @Owner("Yuferev")
     @DisplayName("Заголовок при НЕ валидном запросе поиска")
     void titleNotValidReqSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -79,6 +83,7 @@ public class SearchUiTests extends TestBase {
     @Test
     @Feature("Поиск")
     @Story("Заголовок выдачи")
+    @Owner("Yuferev")
     @DisplayName("Заголовок при валидном запросе поиска")
     void titleValidReqSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -94,6 +99,7 @@ public class SearchUiTests extends TestBase {
     @Test
     @Feature("Поиск")
     @Story("Поиск по фото")
+    @Owner("Yuferev")
     @DisplayName("Появление всплывающего меню при клике на поиск по фото")
     void popUpPhotoSearch() {
         SelenideLogger.addListener("allure", new AllureSelenide());

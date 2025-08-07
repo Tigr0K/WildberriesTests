@@ -2,6 +2,7 @@ package ru.wildberries.tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,7 @@ public class BasketUiTests extends TestBase {
     })
     @Feature("Корзина")
     @Story("Заголовок пустой корзины")
+    @Owner("Yuferev")
     @ParameterizedTest(name = "Появление кнопки при нажатии на корзину")
     void buttunForClickOnBasketTest(String chapter, String buttonText) {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -46,6 +48,7 @@ public class BasketUiTests extends TestBase {
     @Test
     @Feature("Корзина")
     @Story("Работа с товарами в корзине")
+    @Owner("Yuferev")
     @DisplayName("Добавление товара в корзину")
     void addToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -68,6 +71,7 @@ public class BasketUiTests extends TestBase {
     @Test
     @Feature("Корзина")
     @Story("Работа с товарами в корзине")
+    @Owner("Yuferev")
     @DisplayName("Удаления товара из корзины")
     void deleteToBasket() {
         SelenideLogger.addListener("allure", new AllureSelenide());
