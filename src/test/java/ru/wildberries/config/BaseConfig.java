@@ -3,11 +3,24 @@ package guru.qa.owner.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
+        "system:properties",
         "classpath:${runType}.properties",
         "classpath:local.properties",
 })
 
 public interface BaseConfig extends Config {
+    @Key("browserSize")
+    @DefaultValue("1920x1080")
+    String browserSize();
+
+    @Key("baseUrl")
+    @DefaultValue("https://www.wildberries.ru")
+    String baseUrl();
+
+    @Key("remoteUrl")
+    @DefaultValue("https://user1:1234@selenoid.autotests.cloud/wd/hub")
+    String remoteUrl();
+
     @Key("browserName")
     @DefaultValue("chrome")
     String browserName();
@@ -20,7 +33,4 @@ public interface BaseConfig extends Config {
     @DefaultValue("false")
     boolean isRemote();
 
-    @Key("remoteUrl")
-    @DefaultValue("https://www.wildberries.ru")
-    String remoteUrl();
 }

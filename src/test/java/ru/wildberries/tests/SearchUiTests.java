@@ -24,7 +24,7 @@ import static io.qameta.allure.Allure.step;
 
 
 @DisplayName("Параметризированные тесты на проверку поиска Wildberries")
-@Tag("SearchTests")
+@Tag("SearchTest")
 public class SearchUiTests extends TestBase {
     MainPage mainPage = new MainPage();
 

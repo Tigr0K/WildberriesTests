@@ -19,13 +19,14 @@ import static com.codeborne.selenide.Selenide.open;
 public class TestBase {
     @BeforeAll
     static void setupConfig() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://www.wildberries.ru";
         Configuration.pageLoadStrategy = "eager";
 
         BaseConfig config = ConfigFactory.create(BaseConfig.class, System.getProperties());
+        Configuration.browserSize = config.browserSize();
+        Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browserName();
         Configuration.browserVersion = config.browserVersion();
+        Configuration.remote = config.remoteUrl();
         if (config.isRemote()) {
             configureRemote();
         }

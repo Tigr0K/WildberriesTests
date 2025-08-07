@@ -60,3 +60,13 @@ task smokeTests(type: Test) {
         includeTags("SMOKE")
     }
 }
+task searchTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("SearchTests")
+    }
+}
+task basketTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("BasketTests")
+    }
+}
