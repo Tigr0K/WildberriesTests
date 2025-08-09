@@ -1,4 +1,4 @@
-package guru.qa.owner.config;
+package ru.wildberries.config;
 
 import org.aeonbits.owner.Config;
 

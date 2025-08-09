@@ -3,7 +3,7 @@ package ru.wildberries.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import guru.qa.owner.config.BaseConfig;
+import ru.wildberries.config.BaseConfig;
 import ru.wildberries.helpers.UiAttachUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
@@ -26,7 +26,7 @@ public class TestBase {
         Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browserName();
         Configuration.browserVersion = config.browserVersion();
-        Configuration.remote = config.remoteUrl();
+
         if (config.isRemote()) {
             configureRemote();
         }
