@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "classpath:${runType}.properties",
-        "classpath:local.properties",
+        "classpath:localUi.properties",
 })
 
 public interface UiBaseConfig extends Config {
