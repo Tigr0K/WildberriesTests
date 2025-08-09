@@ -35,7 +35,8 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:6.0.0-M1",
             'org.slf4j:slf4j-simple:2.1.0-alpha1',
             "io.qameta.allure:allure-junit4:2.25.0",
-            "io.qameta.allure:allure-selenide:2.25.0"
+            "io.qameta.allure:allure-selenide:2.25.0",
+            'io.github.bonigarcia:webdrivermanager:6.1.0'
     )
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:6.0.0-M1')
 }
