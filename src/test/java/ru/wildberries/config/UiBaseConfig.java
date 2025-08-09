@@ -3,8 +3,8 @@ package ru.wildberries.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "system:properties",
         "classpath:${runType}.properties",
+        "system:properties",
         "classpath:localUi.properties",
 })
 
