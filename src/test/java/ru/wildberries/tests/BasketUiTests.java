@@ -9,21 +9,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import ru.wildberries.pages.MainPage;
-
-import java.util.List;
-import java.util.stream.Stream;
 
 import static io.qameta.allure.Allure.step;
 
 
 @DisplayName("Параметризированные тесты на проверку поиска Wildberries")
 @Tag("BasketTests")
-public class BasketUiTests extends TestBase {
+public class BasketUiTests extends UiTestBase {
     MainPage mainPage = new MainPage();
 
     @CsvSource(value = {

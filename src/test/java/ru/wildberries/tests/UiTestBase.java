@@ -3,7 +3,7 @@ package ru.wildberries.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import ru.wildberries.config.BaseConfig;
+import ru.wildberries.config.UiBaseConfig;
 import ru.wildberries.helpers.UiAttachUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
@@ -16,12 +16,12 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class TestBase {
+public class UiTestBase {
     @BeforeAll
     static void setupConfig() {
         Configuration.pageLoadStrategy = "eager";
 
-        BaseConfig config = ConfigFactory.create(BaseConfig.class, System.getProperties());
+        UiBaseConfig config = ConfigFactory.create(UiBaseConfig.class, System.getProperties());
         Configuration.browserSize = config.browserSize();
         Configuration.baseUrl = config.baseUrl();
         Configuration.browser = config.browserName();
@@ -33,7 +33,7 @@ public class TestBase {
     }
 
     private static void configureRemote() {
-        BaseConfig config = ConfigFactory.create(BaseConfig.class, System.getProperties());
+        UiBaseConfig config = ConfigFactory.create(UiBaseConfig.class, System.getProperties());
         Configuration.remote = config.remoteUrl();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();

@@ -8,7 +8,7 @@ import org.aeonbits.owner.Config;
         "classpath:local.properties",
 })
 
-public interface BaseConfig extends Config {
+public interface UiBaseConfig extends Config {
     @Key("browserSize")
     @DefaultValue("1920x1080")
     String browserSize();
