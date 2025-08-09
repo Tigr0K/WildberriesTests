@@ -3,9 +3,8 @@ package ru.wildberries.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:${runType}.properties",
         "system:properties",
-        "classpath:localUi.properties",
+        "classpath:${runType}.properties"
 })
 
 public interface UiBaseConfig extends Config {
@@ -18,7 +17,7 @@ public interface UiBaseConfig extends Config {
     String baseUrl();
 
     @Key("remoteUrl")
-    @DefaultValue("https://user1:1234@selenoid.autotests.cloud/wd/hub")
+    @DefaultValue("https://www.wildberries.ru")
     String remoteUrl();
 
     @Key("browserName")
@@ -26,7 +25,7 @@ public interface UiBaseConfig extends Config {
     String browserName();
 
     @Key("browserVersion")
-    @DefaultValue("113")
+    @DefaultValue("137")
     String browserVersion();
 
     @Key("isRemote")
